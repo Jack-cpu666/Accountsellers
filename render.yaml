@@ -1,0 +1,16 @@
+# Optional: Use this render.yaml file if you want persistent storage for your SQLite database
+# This requires a paid Render plan
+
+services:
+  - type: web
+    name: accountsellers
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app
+    disk:
+      name: sqlite-data
+      mountPath: /var/data
+      sizeGB: 1
+    envVars:
+      - key: DATABASE_PATH
+        value: /var/data/valorant_marketplace.db
