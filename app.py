@@ -8,9 +8,6 @@ from urllib.parse import urlencode
 from jinja2 import DictLoader
 import click
 
-# Create a custom template loader
-from jinja2 import DictLoader
-
 # Initialize Flask app
 app = Flask(__name__)
 
@@ -548,19 +545,15 @@ LISTING_DETAIL_TEMPLATE = """
 {% endblock %}
 """
 
-# Helper function for rendering templates
-def render_template(template_name, **kwargs):
-    templates = {
-        'base.html': BASE_TEMPLATE,
-        'home.html': HOME_TEMPLATE,
-        'sell.html': SELL_TEMPLATE,
-        'listing_detail.html': LISTING_DETAIL_TEMPLATE
-    }
-    
-    if template_name in templates:
-        return render_template_string(templates[template_name], **kwargs)
-    
-    return "Template not found", 404
+# Set up template loader with all templates
+templates = {
+    'base.html': BASE_TEMPLATE,
+    'home.html': HOME_TEMPLATE,
+    'sell.html': SELL_TEMPLATE,
+    'listing_detail.html': LISTING_DETAIL_TEMPLATE
+}
+
+app.jinja_loader = DictLoader(templates)
 
 # Routes
 @app.route('/')
