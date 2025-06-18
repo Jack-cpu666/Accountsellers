@@ -27,7 +27,7 @@ SQUARE_LOCATION_ID = 'LMNMA0HYA66VX'
 
 DISCORD_CLIENT_ID = '1384772758046507099'
 DISCORD_CLIENT_SECRET = 'T5-jdB_fYB24v8tL7PNgQZ704EKeWeeN'
-APP_BASE_URL = 'https://accountsellers.onrender.com'
+APP_BASE_URL = 'https://accountsellers-1.onrender.com'
 
 # Initialize database
 db = SQLAlchemy(app)
