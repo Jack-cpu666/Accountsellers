@@ -2,10 +2,14 @@ import json
 import secrets
 import requests
 from datetime import datetime
-from flask import Flask, render_template_string, request, redirect, url_for, session, jsonify, flash
+from flask import Flask, render_template, request, redirect, url_for, session, jsonify, flash
 from flask_sqlalchemy import SQLAlchemy
 from urllib.parse import urlencode
+from jinja2 import DictLoader
 import click
+
+# Create a custom template loader
+from jinja2 import DictLoader
 
 # Initialize Flask app
 app = Flask(__name__)
