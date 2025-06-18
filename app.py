@@ -23,7 +23,7 @@ SQUARE_APP_ID = 'sq0idp-3lHcPZwip9351EAnAer92A'
 SQUARE_APP_SECRET = 'sq0csp-nrd_xRzRYwheZKcKWfnJWbP8Dbsr85SUWcQra6d0utM'
 SQUARE_PRODUCTION_ACCESS_TOKEN = 'EAAAl4vy95lvz5ACW3P_SUr-FSeHSGDuEniKxlytApO5jhN-0fcW1LRxcDgxfn7F'
 SQUARE_ENVIRONMENT = 'production'
-SQUARE_LOCATION_ID = 'LMNMA0HYA66VX'  # User needs to fill this
+SQUARE_LOCATION_ID = 'LMNMA0HYA66VX'
 
 DISCORD_CLIENT_ID = '1384772758046507099'
 DISCORD_CLIENT_SECRET = 'T5-jdB_fYB24v8tL7PNgQZ704EKeWeeN'
@@ -555,15 +555,8 @@ def render_template(template_name, **kwargs):
         'listing_detail.html': LISTING_DETAIL_TEMPLATE
     }
     
-    # First render the specific template
     if template_name in templates:
-        content = render_template_string(templates[template_name], **kwargs)
-        
-        # If it extends base, render with base
-        if 'extends' in templates[template_name]:
-            return render_template_string(templates['base.html'], content=content, **kwargs)
-        
-        return content
+        return render_template_string(templates[template_name], **kwargs)
     
     return "Template not found", 404
 
