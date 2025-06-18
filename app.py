@@ -1,4 +1,3 @@
-import os
 import json
 import secrets
 import requests
@@ -13,9 +12,8 @@ app = Flask(__name__)
 
 # Hardcoded Configuration
 app.config['SECRET_KEY'] = 'xK9mN3pQ7rT5wY2zB4dF6hJ8kL1nP3sV5xC7bN9mQ2wE4rT6'
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'postgresql://localhost/valorant_marketplace')
-if app.config['SQLALCHEMY_DATABASE_URI'].startswith('postgres://'):
-    app.config['SQLALCHEMY_DATABASE_URI'] = app.config['SQLALCHEMY_DATABASE_URI'].replace('postgres://', 'postgresql://', 1)
+# Use SQLite database - automatically creates file if it doesn't exist
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///valorant_marketplace.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # Hardcoded Secrets
@@ -27,7 +25,7 @@ SQUARE_LOCATION_ID = 'LMNMA0HYA66VX'
 
 DISCORD_CLIENT_ID = '1384772758046507099'
 DISCORD_CLIENT_SECRET = 'T5-jdB_fYB24v8tL7PNgQZ704EKeWeeN'
-APP_BASE_URL = 'https://accountsellers-1.onrender.com'
+APP_BASE_URL = 'https://accountsellers.onrender.com'
 
 # Initialize database
 db = SQLAlchemy(app)
@@ -801,6 +799,11 @@ def db_create():
     with app.app_context():
         db.create_all()
         click.echo('Database tables created successfully!')
+
+# Auto-create database tables on startup
+with app.app_context():
+    db.create_all()
+    print("Database tables created/verified successfully!")
 
 if __name__ == '__main__':
     app.run(debug=False)
